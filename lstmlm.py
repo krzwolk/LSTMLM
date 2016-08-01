@@ -309,6 +309,7 @@ class LSTMLM:
 		oov_arpa = 0
 		oov_net = 0
 		oov_comb = 0
+		arpa_updated = 0
 
 		self.ivocab = {v: k for k, v in self.vocab.items()}
 
@@ -345,6 +346,7 @@ class LSTMLM:
 				def not_found(i):
 					return self.ivocab[dataset[i + 1]] == UNK
 
+
 				# both OOV
 				if l10_arpa <= -99 and not_found(i):
 					# TODO if unk, then get net OOV prob or 0. (???)
@@ -365,10 +367,13 @@ class LSTMLM:
 				else:
 					comb_prob = net_prob * (1. - self.arpaLM_weight) + arpa_prob * self.arpaLM_weight
 					sum_log_perp -= math.log(comb_prob)
+					if self.arpaLM.update_prob(math.log(comb_prob), *ctx):
+						arpa_updated += 1
 			else:
 				sum_log_perp += loss.data
 
 		if self.arpaLM:
+			print('ARPA updated', arpa_updated)
 			print("OOV both", oov_comb)
 			print("OOV n-gram", oov_arpa)
 		print("OOV net", oov_net)

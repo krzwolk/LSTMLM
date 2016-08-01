@@ -309,6 +309,55 @@ class ArpaLM(object):
 		p = self.prob(*syms)
 		return p * self.lw + self.log_wip
 
+	def update_prob(self, new_prob, *syms):
+		"""
+		Updates the probability of given n-gram in the model
+		Processing is mostly like prob() method
+		:param new_prob: new probability
+		:param syms: context
+		:return: true if ngram found and update, false otherwise
+		"""
+		syms = syms[0: min(len(syms), self.n)]
+		# It makes the most sense to do this recursively
+		n = len(syms)
+		if n == 1:
+			if syms[0] in self.ngmap[0]:
+				# 1-Gram exists, just return its probability
+				self.ngrams[0][self.ngmap[0][syms[0]]][0] = new_prob
+				return True
+			else:
+				# raise IndexError, "ARPA LM: found OOV word %s" % syms[0]
+				# print "ARPA LM: found OOV word %s" % syms[0]
+				return False
+		else:
+			# Forward N-gram (since syms is reversed)
+			fsyms = tuple(reversed(syms))
+			if fsyms in self.ngmap[n - 1]:
+				# N-Gram exists, just return its probability
+				self.ngrams[n - 1][self.ngmap[n - 1][fsyms]][0] = new_prob
+				return True
+			else:
+				# Backoff: alpha(history) * probability (N-1-Gram)
+				fhist = fsyms[:-1]
+				# New N-1 gram symbols (reversed order)
+				syms = syms[:-1]
+				# Treat unigram histories a bit specially
+				if len(fhist) == 1:
+					fhist = fhist[0]
+					# Try to back off to <unk> if word doesn't exist -
+					# if this is a closed vocab model this will just
+					# return the unigram prob for syms[0]
+					if not fhist in self.ngmap[0]:
+						fhist = '<unk>'
+				if fhist in self.ngmap[n - 2]:
+					# Try to use the history if it exists
+					bowt = self.ngrams[n - 2][self.ngmap[n - 2][fhist]][1]
+					return self.update_prob(new_prob - bowt, *syms)
+				else:
+					# Otherwise back off some more
+					return self.update_prob(new_prob, *syms)
+
+
 	def prob(self, *syms):
 		"""
 		Return the language model log-probability for an N-Gram
