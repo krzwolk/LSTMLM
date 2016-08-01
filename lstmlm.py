@@ -59,107 +59,107 @@ import net
 import ArpaLM
 
 try:
-	from gensim_rm_online import gensim as gensim2
+	pass
+# from gensim_rm_online import gensim as gensim2
 except ImportError:
 	raise ImportError("For word2vec online methods you need modified"
-	                  " gensim package. Please, install rm_online branch from "
-	                  "https://github.com/rutum/gensim/tree/c93b63ecdd47fc29377afdf4a4b7a0bf42256b71")
+					  " gensim package. Please, install rm_online branch from "
+					  "https://github.com/rutum/gensim/tree/c93b63ecdd47fc29377afdf4a4b7a0bf42256b71")
 
 # various configurations
 
 TinyConfig = {
-	"init_scale" : 0.1,
-	"learning_rate" : 1.0,
-	"max_grad_norm" : 5,
-	"num_layers" : 1,
-	"num_steps" : 20,
-	"hidden_size" : 100,
-	"max_epoch" : 4,
-	"max_max_epoch" : 11,
-	"keep_prob" : 1.0,
-	"lr_decay" : 0.5,
-	"batch_size" : 30,
-	}
+	"init_scale": 0.1,
+	"learning_rate": 1.0,
+	"max_grad_norm": 5,
+	"num_layers": 1,
+	"num_steps": 20,
+	"hidden_size": 100,
+	"max_epoch": 4,
+	"max_max_epoch": 11,
+	"keep_prob": 1.0,
+	"lr_decay": 0.5,
+	"batch_size": 30,
+}
 
 # PTB - optimal https://github.com/wojzaremba/lstm/pull/5
 OptimalConfig = {
-	"init_scale" : 0.11,
-	"learning_rate" : 0.71,
-	"max_grad_norm" : 16.57,
-	"num_layers" : 2, #fixed parameter
-	"num_steps" : 20, #fixed parameter
-	"hidden_size" : 509,
-	"max_epoch" : 8,
-	"max_max_epoch" : 13, #fixed parameter
-	"keep_prob" : 1-0.42,
-	"lr_decay" : 1/2.79,
-	"batch_size" : 30, # fixed parameter
-	}
+	"init_scale": 0.11,
+	"learning_rate": 0.71,
+	"max_grad_norm": 16.57,
+	"num_layers": 2,  # fixed parameter
+	"num_steps": 20,  # fixed parameter
+	"hidden_size": 509,
+	"max_epoch": 8,
+	"max_max_epoch": 13,  # fixed parameter
+	"keep_prob": 1 - 0.42,
+	"lr_decay": 1 / 2.79,
+	"batch_size": 30,  # fixed parameter
+}
 
 # the same as https://github.com/wojzaremba/lstm
 SmallConfig = {
-	"init_scale" : 0.1,
-	"learning_rate" : 1.0,
-	"max_grad_norm" : 5,
-	"num_layers" : 2,
-	"num_steps" : 20,
-	"hidden_size" : 200,
-	"max_epoch" : 4,
-	"max_max_epoch" : 13,
-	"keep_prob" : 1.0,
-	"lr_decay" : 0.5,
-	"batch_size" : 20,
-	}
+	"init_scale": 0.1,
+	"learning_rate": 1.0,
+	"max_grad_norm": 5,
+	"num_layers": 2,
+	"num_steps": 20,
+	"hidden_size": 200,
+	"max_epoch": 4,
+	"max_max_epoch": 13,
+	"keep_prob": 1.0,
+	"lr_decay": 0.5,
+	"batch_size": 20,
+}
 
 MediumConfig = {
-	"init_scale" : 0.05,
-	"learning_rate" : 1.0,
-	"max_grad_norm" : 5,
-	"num_layers" : 2,
-	"num_steps" : 35,
-	"hidden_size" : 640,
-	"max_epoch" : 6,
-	"max_max_epoch" : 39,
-	"keep_prob" : 0.5,
-	"lr_decay" : 0.8,
-	"batch_size" : 20,
-	}
+	"init_scale": 0.05,
+	"learning_rate": 1.0,
+	"max_grad_norm": 5,
+	"num_layers": 2,
+	"num_steps": 35,
+	"hidden_size": 640,
+	"max_epoch": 6,
+	"max_max_epoch": 39,
+	"keep_prob": 0.5,
+	"lr_decay": 0.8,
+	"batch_size": 20,
+}
 
 LargeConfig = {
-	"init_scale" : 0.04,
-	"learning_rate" : 1.0,
-	"max_grad_norm" : 10,
-	"num_layers" : 2,
-	"num_steps" : 35,
-	"hidden_size" : 1000,
-	"max_epoch" : 14,
-	"max_max_epoch" : 55,
-	"keep_prob" : 0.35,
-	"lr_decay" : 1 / 1.15,
-	"batch_size" : 30,
-	}
+	"init_scale": 0.04,
+	"learning_rate": 1.0,
+	"max_grad_norm": 10,
+	"num_layers": 2,
+	"num_steps": 35,
+	"hidden_size": 1000,
+	"max_epoch": 14,
+	"max_max_epoch": 55,
+	"keep_prob": 0.35,
+	"lr_decay": 1 / 1.15,
+	"batch_size": 30,
+}
 
 # https://github.com/karpathy/char-rnn/blob/master/train.lua
 CharConfig = {
-	"init_scale" : 0.08,
-	"learning_rate" : 0.002,
-	"max_grad_norm" : 5,
-	"num_layers" : 2,
-	"num_steps" : 50,
-	"hidden_size" : 128,
-	"max_epoch" : 10,
-	"max_max_epoch" : 50,
-	"keep_prob" : 0.35,
-	"lr_decay" : 0.97,
-	"batch_size" : 20,
-	}
+	"init_scale": 0.08,
+	"learning_rate": 0.002,
+	"max_grad_norm": 5,
+	"num_layers": 2,
+	"num_steps": 50,
+	"hidden_size": 128,
+	"max_epoch": 10,
+	"max_max_epoch": 50,
+	"keep_prob": 0.35,
+	"lr_decay": 0.97,
+	"batch_size": 20,
+}
 
 UNK = "<unk>"
 EOS = "</s>"
 
 
 class LSTMLM:
-
 	def __init__(self, args):
 
 		if args.config == "tiny":
@@ -242,23 +242,21 @@ class LSTMLM:
 		if args.nbest:
 			self.nbest(args.nbest)
 
-
 	def save(self, filename):
 		""" Save the model, the optimizer, vocabulary and config"""
 		filename = os.path.abspath(filename)
-		serializers.save_hdf5(filename+'.model', self.model)
-		serializers.save_hdf5(filename+'.state', self.optimizer)
-		cPickle.dump(self.vocab, open(filename+'.vocab', "w"))
-		cPickle.dump(self.config, open(filename+'.config', "w"))
+		serializers.save_hdf5(filename + '.model', self.model)
+		serializers.save_hdf5(filename + '.state', self.optimizer)
+		cPickle.dump(self.vocab, open(filename + '.vocab', "w"))
+		cPickle.dump(self.config, open(filename + '.config', "w"))
 		with tarfile.open(filename, "w") as tar:
-			for fn in [filename+'.model', filename+'.state', filename+'.vocab', filename+'.config']:
+			for fn in [filename + '.model', filename + '.state', filename + '.vocab', filename + '.config']:
 				tar.add(fn, arcname=os.path.basename(fn))
 				os.remove(fn)
 
-
 	def load_text_data(self, filename, update_vocab=False):
 		"""Loads text to ints, update vocab if text is training"""
-		words = open(filename).read().replace('\n', ' '+EOS+' ').strip().split()
+		words = open(filename).read().replace('\n', ' ' + EOS + ' ').strip().split()
 		dataset = np.ndarray((len(words),), dtype=np.int32)
 		if EOS not in self.vocab and update_vocab:
 			self.vocab[EOS] = len(self.vocab)
@@ -282,10 +280,9 @@ class LSTMLM:
 			self.tree = L.BinaryHierarchicalSoftmax.create_huffman_tree(tree)
 		return dataset, words
 
-
 	def load_char_data(self, filename, update_vocab=False):
 		"""Loads text to ints, update vocab if text is training"""
-		words = open(filename).read()#.replace('\n', ' '+EOS+' ').strip().split()
+		words = open(filename).read()  # .replace('\n', ' '+EOS+' ').strip().split()
 		dataset = np.ndarray((len(words),), dtype=np.int32)
 		for i, word in enumerate(words):
 			if word not in self.vocab:
@@ -293,7 +290,6 @@ class LSTMLM:
 					self.vocab[word] = len(self.vocab)
 			dataset[i] = self.vocab[word]
 		return dataset
-
 
 	def evaluate(self, dataset, text=None):
 		""""Evaluate net on input dataset 
@@ -317,8 +313,8 @@ class LSTMLM:
 		self.ivocab = {v: k for k, v in self.vocab.items()}
 
 		for i in six.moves.range(dataset.size - 1):
-			x = chainer.Variable(xp.asarray(dataset[i : i + 1]), volatile='on')
-			t = chainer.Variable(xp.asarray(dataset[i + 1 : i + 2]), volatile='on')
+			x = chainer.Variable(xp.asarray(dataset[i: i + 1]), volatile='on')
+			t = chainer.Variable(xp.asarray(dataset[i + 1: i + 2]), volatile='on')
 			loss = evaluator(x, t)
 
 			if self.arpaLM and text:
@@ -340,29 +336,33 @@ class LSTMLM:
 
 				le_arpa = self.arpaLM.prob(*ctx)
 				l10_arpa = LOGTOLOG10 * le_arpa
+
+				# arpa probability
+				arpa_prob = math.exp(le_arpa)
+				# network probability
+				net_prob = math.exp(-loss.data)
+
+				def not_found(i):
+					return self.ivocab[dataset[i + 1]] == UNK
+
 				# both OOV
-				if l10_arpa <= -99 and self.ivocab[dataset[i + 1]] == UNK:
+				if l10_arpa <= -99 and not_found(i):
 					# TODO if unk, then get net OOV prob or 0. (???)
-					net_prob = math.exp(-loss.data)
 					comb_prob = net_prob * (1. - self.arpaLM_weight)
 					sum_log_perp -= math.log(comb_prob)
 					oov_comb += 1
 				# net OOV
-				elif l10_arpa > -99 and self.ivocab[dataset[i+1]] == UNK:
-					arpa_prob = math.exp(le_arpa)
+				elif l10_arpa > -99 and not_found(i):
 					comb_prob = arpa_prob
 					sum_log_perp -= math.log(comb_prob)
 					oov_net += 1
 				# ngram OOV
 				elif l10_arpa <= -99:
-					net_prob = math.exp(-loss.data)
 					comb_prob = net_prob * (1. - self.arpaLM_weight)
 					sum_log_perp -= math.log(comb_prob)
 					oov_arpa += 1
 				# combine
 				else:
-					arpa_prob = math.exp(le_arpa)
-					net_prob = math.exp(-loss.data)
 					comb_prob = net_prob * (1. - self.arpaLM_weight) + arpa_prob * self.arpaLM_weight
 					sum_log_perp -= math.log(comb_prob)
 			else:
@@ -375,7 +375,6 @@ class LSTMLM:
 		print('logprob', sum_log_perp)
 		return math.exp(float(sum_log_perp) / (dataset.size - 1))
 
-
 	def load_nbest_data(self, filename):
 		"""Helper to load nbestlist to ints"""
 		for line in open(filename):
@@ -385,10 +384,9 @@ class LSTMLM:
 			dataset = np.ndarray((len(words),), dtype=np.int32)
 			for i, word in enumerate(words):
 				if word not in self.vocab:
-						word = UNK
+					word = UNK
 				dataset[i] = self.vocab[word]
 			yield dataset
-
 
 	def nbest(self, filename):
 		"""Print logprog computed for every line of input file"""
@@ -406,7 +404,6 @@ class LSTMLM:
 			evaluator.predictor.reset_state()
 			print(-sum_log_perp)
 
-
 	def init_net(self, config, randomize=True):
 		"""Prepare RNNLM model, defined in net.py"""
 		if config["num_layers"] == 1:
@@ -420,7 +417,8 @@ class LSTMLM:
 
 		if self.hs:
 			# or hierarchical softmax
-			self.model = net.HSMmodel(len(self.vocab), config["hidden_size"], self.tree, ratio=config["keep_prob"], train=True)
+			self.model = net.HSMmodel(len(self.vocab), config["hidden_size"], self.tree, ratio=config["keep_prob"],
+									  train=True)
 		else:
 			# softmax
 			self.model = L.Classifier(self.lm)
@@ -432,10 +430,9 @@ class LSTMLM:
 
 		# Setup optimizer
 		self.optimizer = optimizers.SGD(lr=config["learning_rate"])
-		#self.optimizer = optimizers.Adam()
+		# self.optimizer = optimizers.Adam()
 		self.optimizer.setup(self.model)
 		self.optimizer.add_hook(chainer.optimizer.GradientClipping(config["max_grad_norm"]))
-
 
 	def train(self, train_data, valid_data):
 		"""
@@ -449,10 +446,11 @@ class LSTMLM:
 		cur_at = start_at
 		accum_loss = 0
 		batch_idxs = list(range(self.config["batch_size"]))
-		print('Going to train through {} words in {} epochs'.format(jump * self.config["max_max_epoch"] * self.config["batch_size"], self.config["max_max_epoch"]))
+		print('Going to train through {} words in {} epochs'.format(
+			jump * self.config["max_max_epoch"] * self.config["batch_size"], self.config["max_max_epoch"]))
 		PRINT_POINT = (jump // 10)
 
-		#self.save(self.save_net+"."+str(epoch)+".lstm")
+		# self.save(self.save_net+"."+str(epoch)+".lstm")
 		self.ivocab = {v: k for k, v in self.vocab.items()}
 
 		for i in six.moves.range(jump * self.config["max_max_epoch"]):
@@ -464,7 +462,7 @@ class LSTMLM:
 				[train_data[(jump * j + i + 1) % whole_len] for j in batch_idxs]))
 
 			loss_i = self.model(x, t)
-			#print(loss_i.data)
+			# print(loss_i.data)
 			accum_loss += loss_i
 			cur_log_perp += loss_i.data
 
@@ -482,8 +480,9 @@ class LSTMLM:
 					perp = float(cur_log_perp) / PRINT_POINT
 				else:
 					perp = math.exp(float(cur_log_perp) / PRINT_POINT)
-				#perp = float(cur_log_perp) / PRINT_POINT
-				print('iter {:.1f} training perplexity: {:.2f} ({:.2f} words/sec)'.format((i + 1) / jump, perp, throuput))
+				# perp = float(cur_log_perp) / PRINT_POINT
+				print(
+					'iter {:.1f} training perplexity: {:.2f} ({:.2f} words/sec)'.format((i + 1) / jump, perp, throuput))
 				cur_at = now
 				cur_log_perp.fill(0)
 				sys.stdout.flush()
@@ -495,13 +494,12 @@ class LSTMLM:
 				print('epoch {} validation perplexity: {:.2f}'.format(epoch, perp))
 				cur_at += time.time() - now  # skip time of evaluation
 
-				self.save(self.save_net+"."+str(epoch)+".lstm")
+				self.save(self.save_net + "." + str(epoch) + ".lstm")
 
 				if epoch >= self.config["max_epoch"]:
 					self.optimizer.lr *= self.config["lr_decay"]
 					print('learning rate =', self.optimizer.lr)
 				sys.stdout.flush()
-
 
 	def load_net(self, filename, resume=None):
 		"""
@@ -511,13 +509,12 @@ class LSTMLM:
 		pathname = os.path.dirname(filename)
 		with tarfile.open(filename, "r") as tar:
 			tar.extractall(path=pathname)
-		self.config = cPickle.load(open(filename+'.config', "r"))
-		self.vocab = cPickle.load(open(filename+'.vocab', "r"))
+		self.config = cPickle.load(open(filename + '.config', "r"))
+		self.vocab = cPickle.load(open(filename + '.vocab', "r"))
 		self.init_net(self.config, randomize=False)
-		serializers.load_hdf5(filename+'.model', self.model)
+		serializers.load_hdf5(filename + '.model', self.model)
 		if resume:
-			serializers.load_hdf5(filename+'.state', self.optimizer)
-
+			serializers.load_hdf5(filename + '.state', self.optimizer)
 
 	def getLogP(list_of_words):
 		"""Gets logprob of list of input words"""
@@ -525,7 +522,6 @@ class LSTMLM:
 
 
 class LSTMLM_FV(LSTMLM):
-	
 	def __init__(self, args):
 
 		if args.config == "optimal":
@@ -565,7 +561,7 @@ class LSTMLM_FV(LSTMLM):
 			print('#vocab =', len(self.vocab))
 
 		if args.fv1:
-			
+
 			self.fv1model = gensim2.models.Word2Vec.load(args.fv1)
 
 			k = self.fv1model.vocab.keys()[0]
@@ -574,7 +570,7 @@ class LSTMLM_FV(LSTMLM):
 			self.fv_len = self.input_size
 
 			if not UNK in self.fv1model.vocab.keys():
-				self.fv[UNK] = np.zeros((self.fv_len, )).astype(dtype=xp.float32)
+				self.fv[UNK] = np.zeros((self.fv_len,)).astype(dtype=xp.float32)
 
 			self.fv = {}
 			for k in self.fv1model.vocab.keys():
@@ -597,7 +593,7 @@ class LSTMLM_FV(LSTMLM):
 
 			# set UNK if not in FVs
 			if not UNK in self.fv.keys():
-				self.fv[UNK] = np.zeros((self.fv_len, )).astype(dtype=xp.float32)
+				self.fv[UNK] = np.zeros((self.fv_len,)).astype(dtype=xp.float32)
 
 			# load words in vocab and not in FVs
 			for k in self.vocab.keys():
@@ -644,7 +640,7 @@ class LSTMLM_FV(LSTMLM):
 
 	def load_text_data(self, filename, update_vocab=False):
 		"""Loads text to ints, update vocab if text is training"""
-		words = open(filename).read().replace('\n', ' '+EOS+' ').strip().split()
+		words = open(filename).read().replace('\n', ' ' + EOS + ' ').strip().split()
 		dataset = np.ndarray((len(words),), dtype=np.int32)
 		if not EOS in self.vocab and update_vocab:
 			self.vocab[EOS] = len(self.vocab)
@@ -660,7 +656,6 @@ class LSTMLM_FV(LSTMLM):
 			dataset[i] = self.vocab[word]
 		return dataset, words
 
-
 	def evaluate(self, dataset, dataset_text, fname=None):
 		""""Evaluate net on input dataset 
 			return perplexity"""
@@ -670,7 +665,7 @@ class LSTMLM_FV(LSTMLM):
 
 		if args.fv or args.fv1:
 			if args.fv1:
-				if args.fv_type == 0: #update only UNK words
+				if args.fv_type == 0:  # update only UNK words
 					for wrd in dataset_text:
 						if wrd not in self.fv:
 							if wrd in self.fv1model.vocab.keys():
@@ -678,14 +673,14 @@ class LSTMLM_FV(LSTMLM):
 							else:
 								self.fv[wrd] = self.fv[UNK]
 
-				if args.fv_type == 1: # update all words in valid
+				if args.fv_type == 1:  # update all words in valid
 					for wrd in dataset_text:
 						if wrd in self.fv1model.vocab.keys():
 							self.fv[wrd] = self.fv1model[wrd]
 						else:
 							self.fv[wrd] = self.fv[UNK]
 
-				if args.fv_type == 2: # update all words in train+valid
+				if args.fv_type == 2:  # update all words in train+valid
 					for k in self.fv1model.vocab.keys():
 						self.fv[k] = self.fv1model[k]
 					for wrd in dataset_text:
@@ -694,14 +689,13 @@ class LSTMLM_FV(LSTMLM):
 
 		sum_log_perp = 0
 		for i in six.moves.range(dataset.size - 1):
-			cache = dataset_text[max(0, i-self.cache_len) : i + 1]
+			cache = dataset_text[max(0, i - self.cache_len): i + 1]
 			dx = self.make_fv(dataset_text[i], cache)
 			x = chainer.Variable(xp.asarray([dx]), volatile="on")
-			t = chainer.Variable(xp.asarray(dataset[i + 1 : i + 2]), volatile='on')
+			t = chainer.Variable(xp.asarray(dataset[i + 1: i + 2]), volatile='on')
 			loss = evaluator(x, t)
 			sum_log_perp += loss.data
 		return math.exp(float(sum_log_perp) / (dataset.size - 1))
-
 
 	def load_nbest_data(self, filename):
 		"""Helper to load nbestlist to ints"""
@@ -716,7 +710,6 @@ class LSTMLM_FV(LSTMLM):
 					words[i] = UNK
 				dataset[i] = self.vocab[word]
 			yield dataset, words
-
 
 	def nbest(self, filename):
 		"""Print logprog computed for every line of input file"""
@@ -737,40 +730,39 @@ class LSTMLM_FV(LSTMLM):
 								else:
 									self.fv[wrd] = self.fv[UNK]
 
-					if args.fv_type == 1: # update all words in valid
+					if args.fv_type == 1:  # update all words in valid
 						for wrd in dataset_text:
 							if wrd in self.fv1model.vocab.keys():
 								self.fv[wrd] = self.fv1model[wrd]
 							else:
 								self.fv[wrd] = self.fv[UNK]
 
-					if args.fv_type == 2: # update all words in train+valid
+					if args.fv_type == 2:  # update all words in train+valid
 						for k in self.fv1model.vocab.keys():
 							self.fv[k] = self.fv1model[k]
 						for wrd in dataset_text:
 							if wrd not in self.fv1model.vocab.keys():
 								self.fv[wrd] = self.fv[UNK]
 
-
 			sum_log_perp = 0
 			for i in six.moves.range(dataset.size - 1):
-				cache = dataset_text[max(0, i-self.cache_len) : i + 1]
+				cache = dataset_text[max(0, i - self.cache_len): i + 1]
 				dx = self.make_fv(dataset_text[i], cache)
 				x = chainer.Variable(xp.asarray([dx]), volatile="on")
-				t = chainer.Variable(xp.asarray(dataset[i + 1 : i + 2]), volatile='on')
+				t = chainer.Variable(xp.asarray(dataset[i + 1: i + 2]), volatile='on')
 				loss = evaluator(x, t)
 				sum_log_perp += loss.data
 			evaluator.predictor.reset_state()
 			print(-sum_log_perp)
 
-
-
 	def init_net(self, config, randomize=True):
 		"""Prepare RNNLM model, defined in net.py"""
 		if config["num_layers"] == 1:
-			self.lm = net.RNNLM_FV_1layer(self.input_size, config["hidden_size"], len(self.vocab), ratio=config["keep_prob"], train=True)
+			self.lm = net.RNNLM_FV_1layer(self.input_size, config["hidden_size"], len(self.vocab),
+										  ratio=config["keep_prob"], train=True)
 		else:
-			self.lm = net.RNNLM_FV_2layer(self.input_size, config["hidden_size"], len(self.vocab), ratio=config["keep_prob"], train=True)
+			self.lm = net.RNNLM_FV_2layer(self.input_size, config["hidden_size"], len(self.vocab),
+										  ratio=config["keep_prob"], train=True)
 		self.model = L.Classifier(self.lm)
 		self.model.compute_accuracy = False  # we only want the perplexity
 		if randomize:
@@ -781,7 +773,6 @@ class LSTMLM_FV(LSTMLM):
 		self.optimizer = optimizers.SGD(lr=config["learning_rate"])
 		self.optimizer.setup(self.model)
 		self.optimizer.add_hook(chainer.optimizer.GradientClipping(config["max_grad_norm"]))
-
 
 	def train(self, train_data, train_words, valid_data, valid_words):
 		# Learning loop
@@ -806,7 +797,7 @@ class LSTMLM_FV(LSTMLM):
 
 			for j in batch_idxs:
 				idx = (jump * j + i) % whole_len
-				cache = train_words[max(0, idx-self.cache_len) : idx + 1]
+				cache = train_words[max(0, idx - self.cache_len): idx + 1]
 				dx[j] = self.make_fv(train_words[idx], cache)
 
 			x = chainer.Variable(xp.asarray(dx))
@@ -828,7 +819,8 @@ class LSTMLM_FV(LSTMLM):
 				now = time.time()
 				throuput = PRINT_POINT * self.config["batch_size"] / (now - cur_at)
 				perp = math.exp(float(cur_log_perp) / PRINT_POINT)
-				print('iter {:.1f} training perplexity: {:.2f} ({:.2f} words/sec)'.format((i + 1) / jump, perp, throuput))
+				print(
+					'iter {:.1f} training perplexity: {:.2f} ({:.2f} words/sec)'.format((i + 1) / jump, perp, throuput))
 				cur_at = now
 				cur_log_perp.fill(0)
 				sys.stdout.flush()
@@ -845,13 +837,12 @@ class LSTMLM_FV(LSTMLM):
 				print('epoch {} validation perplexity: {:.2f}'.format(epoch, perp))
 				cur_at += time.time() - now  # skip time of evaluation
 
-				self.save(self.save_net+"."+str(epoch)+".lstm")
+				self.save(self.save_net + "." + str(epoch) + ".lstm")
 
 				if epoch >= self.config["max_epoch"]:
 					self.optimizer.lr *= self.config["lr_decay"]
 					print('learning rate =', self.optimizer.lr)
 				sys.stdout.flush()
-
 
 
 if __name__ == "__main__":
@@ -883,7 +874,6 @@ if __name__ == "__main__":
 	parser.add_argument('--random-seed', default=None, type=int, dest="random_seed",
 						help='Set random seed')
 
-
 	parser.add_argument('--train', default=None, metavar="FILE",
 						help='Train text file')
 	parser.add_argument('--valid', default=None, metavar="FILE",
@@ -902,12 +892,12 @@ if __name__ == "__main__":
 	parser.add_argument('--fv+', metavar="FILE", default=None, dest="fv1",
 						help='cPickled python dictionary with feature vectors for every word in vocab')
 	parser.add_argument('--fv-type', metavar="FILE", dest="fv_type",
-						type=int, choices=[0,1,2], default=0,
+						type=int, choices=[0, 1, 2], default=0,
 						help='type == 0: update only UNK words, '
-								'type == 1: # update all words in valid, '
-								'type == 2: # update all words in train+valid')
+							 'type == 1: # update all words in valid, '
+							 'type == 2: # update all words in train+valid')
 
-	parser.add_argument('--num-layers', type=int, default=None, choices=[1,2,3],
+	parser.add_argument('--num-layers', type=int, default=None, choices=[1, 2, 3],
 						help='Number of LSTM layers (1 or 2)')
 	parser.add_argument('--hidden-size', type=int, default=None,
 						help='Size of hidden layer')
