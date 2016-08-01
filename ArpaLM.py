@@ -227,9 +227,9 @@ class ArpaLM(object):
 				score *= LOGTOLOG10
 				bowt *= LOGTOLOG10
 				if n == self.n:
-					fh.write("%.4f <unk>\n" % (score))
+					fh.write("%f <unk>\n" % (score))
 				else:
-					fh.write("%.4f <unk>\t%.4f\n" % (score,bowt))
+					fh.write("%f <unk>\t%f\n" % (score,bowt))
 			for g in ngrams:
 				if g == '<unk>':
 					continue
@@ -240,9 +240,9 @@ class ArpaLM(object):
 				if n > 1:
 					g = " ".join(g)
 				if n == self.n:
-					fh.write("%.4f %s\n" % (score, g))
+					fh.write("%f %s\n" % (score, g))
 				else:
-					fh.write("%.4f %s\t%.4f\n" % (score, g, bowt))
+					fh.write("%f %s\t%f\n" % (score, g, bowt))
 		fh.write("\n\\end\\\n")
 		fh.close()
 
