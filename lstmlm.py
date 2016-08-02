@@ -44,6 +44,7 @@ import cPickle
 import numpy as np
 import six
 import os
+import copy
 
 # import chainer
 import chainer
@@ -193,6 +194,9 @@ class LSTMLM:
 		else:
 			self.save_net = "_".join(["foo", str(self.config["hidden_size"]), str(self.config["num_layers"])])
 
+		if args.save_lm:
+			self.save_lm = args.save_lm
+
 		if args.train and args.valid:
 			if args.char:
 				train_data = self.load_char_data(args.train, update_vocab=True)
@@ -310,6 +314,9 @@ class LSTMLM:
 		oov_net = 0
 		oov_comb = 0
 		arpa_updated = 0
+		arpa_to_save = None
+		if self.save_lm:
+			arpa_to_save = copy.deepcopy(self.arpaLM)
 
 		self.ivocab = {v: k for k, v in self.vocab.items()}
 
@@ -367,13 +374,18 @@ class LSTMLM:
 				else:
 					comb_prob = net_prob * (1. - self.arpaLM_weight) + arpa_prob * self.arpaLM_weight
 					sum_log_perp -= math.log(comb_prob)
-					if self.arpaLM.update_prob(math.log(comb_prob), *ctx):
-						arpa_updated += 1
+					if arpa_to_save:
+						if arpa_to_save.update_prob(math.log(comb_prob), *ctx):
+							arpa_updated += 1
 			else:
 				sum_log_perp += loss.data
 
 		if self.arpaLM:
-			print('ARPA updated', arpa_updated)
+			if arpa_to_save:
+				print('ARPA updated', arpa_updated)
+				arpa_to_save.save(self.save_lm)
+				print('ARPA model saved to %s' % self.save_lm)
+
 			print("OOV both", oov_comb)
 			print("OOV n-gram", oov_arpa)
 		print("OOV net", oov_net)
@@ -867,9 +879,11 @@ if __name__ == "__main__":
 	parser.add_argument('--resume', '-r', action="store_true",
 						help='Resume the training of the model')
 	parser.add_argument('--char', action="store_true",
-						help='Swith to char LM')
+						help='Switch to char LM')
 	parser.add_argument('--save-net', dest='save_net', metavar="FILE", default=None,
 						help='Computes PPL of net on text file (if we train, do that after training)')
+	parser.add_argument('--save-lm', dest='save_lm', metavar="FILE", default=None,
+						help='Saves fixed ARPA language model to file')
 
 	parser.add_argument('--gpu', '-g', default=0, type=int,
 						help='GPU ID (negative value indicates CPU)')
