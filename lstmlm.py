@@ -187,6 +187,7 @@ class LSTMLM:
 		self.optimizer = None
 		self.arpaLM = None
 		self.arpaLM_weight = None
+		self.save_lm = None
 		self.hs = args.hs
 
 		if args.save_net:
