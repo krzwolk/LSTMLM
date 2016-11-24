@@ -240,9 +240,9 @@ class ArpaLM(object):
 				if n > 1:
 					g = " ".join(g)
 				if n == self.n or bowt == 0:
-					fh.write("%f %s\n" % (score, g))
+					fh.write("%f\t%s\n" % (score, g))
 				else:
-					fh.write("%f %s\t%.8f\n" % (score, g, bowt))
+					fh.write("%f\t%s\t%.8f\n" % (score, g, bowt))
 		fh.write("\n\\end\\\n")
 		fh.close()
 
