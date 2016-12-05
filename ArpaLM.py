@@ -227,9 +227,9 @@ class ArpaLM(object):
 				score *= LOGTOLOG10
 				bowt *= LOGTOLOG10
 				if n == self.n or bowt == 0:
-					fh.write("%f <unk>\n" % (score))
+					fh.write("%f\t<unk>\n" % (score))
 				else:
-					fh.write("%f <unk>\t%.8f\n" % (score,bowt))
+					fh.write("%f\t<unk>\t%.8f\n" % (score,bowt))
 			for g in ngrams:
 				if g == '<unk>':
 					continue
