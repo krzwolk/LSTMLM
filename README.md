@@ -28,6 +28,7 @@ You will need:
 
 Python libs:
 - chainer >= 0.17 (chainer.org)
+- cupy-cuda (choose appropriate version: http://docs-cupy.chainer.org/en/stable/install.html#install-cupy)
 - numpy
 - argparse (is in python 2.7 and higher)
 - gensim (for FV extension) or gensim with online word2vec update function (rm_online branch from https://github.com/rutum/gensim/tree/c93b63ecdd47fc29377afdf4a4b7a0bf42256b71)
@@ -35,7 +36,7 @@ Python libs:
 ## How to install gensim2/gensim_rm_online
 For word2vec online methods you need modified gensim package. If you will not need this functionality, simply comment out the line with import in lstmlm.py. Here is how to get it:
 
-1. Clone this repo including rm_online branch of gensim ```git clone --recursive https://github.com/dansoutner/LSTMLM.git```
+1. Clone this repo including rm_online branch of gensim ```git clone --recursive https://github.com/aanodin/LSTMLM.git```
 2. Add empty ```__init__.py``` file to gensim_rm_online subdir to allow python to import from there easily.
 
 ### Usage
